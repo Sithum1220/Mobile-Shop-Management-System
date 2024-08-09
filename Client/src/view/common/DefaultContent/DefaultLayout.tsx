@@ -6,8 +6,8 @@ export class DefaultLayout extends Component {
     render() {
         return (
             <>
-                <NavBar/>
-                <MainContent/>
+                <NavBar />
+                <MainContent />
             </>
         );
     }

@@ -3,6 +3,8 @@ import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Login} from "./view/pages/Login/Login";
 import {Register} from "./view/pages/Register/Register";
+import {Dashboard} from "./view/pages/Dashboard/Dashboard";
+import {DefaultLayout} from "./view/common/DefaultContent/DefaultLayout";
 
 function App() {
   return (
@@ -11,6 +13,7 @@ function App() {
           <Routes>
               <Route path="/" Component={Login}></Route>
               <Route path="/register" Component={Register}></Route>
+              <Route path="/dashboard" Component={DefaultLayout}></Route>
           </Routes>
       </BrowserRouter>
     </div>

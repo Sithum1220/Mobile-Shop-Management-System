@@ -40,9 +40,13 @@ export function Login() {
                         </a>
                     </div>
                     <div className="mt-8">
-                        <button className="bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-600">
-                            Login
-                        </button>
+                        <Link to="/dashboard">
+                            <button
+                                className="bg-blue-700 text-white font-bold py-2 px-4 w-full rounded hover:bg-blue-600">
+                                Login
+                            </button>
+                        </Link>
+
                     </div>
                     <div className="mt-4 flex items-center w-full text-center">
                         <Link
