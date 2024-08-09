@@ -12,9 +12,9 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
-import logo from '../../image/img.png'; // Import your logo image
+import logo from '../../image/img.png';
 
-// const pages = ['Dashboard', 'Employee', 'Suppliers','Customers','Orders'];
+const pages = ['Dashboard', 'Employee', 'Supplier','Inventory','Orders'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export function NavBar() {
@@ -40,17 +40,24 @@ export function NavBar() {
         <AppBar position="static" sx={{ backgroundColor: 'white' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <Box
+                    {/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
+                    <Typography
+                        variant="h6"
+                        noWrap
                         component="a"
-                        href="dashboard"
+                        href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 2,
                             display: { xs: 'none', md: 'flex' },
-                            flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
                         }}
                     >
-                        <img src={logo} alt="Logo" style={{ height: '40px' }} />
-                    </Box>
+                        <img src={logo} className="w-32" alt=""/>
+                    </Typography>
 
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -59,7 +66,8 @@ export function NavBar() {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-
+                            color="inherit"
+                            sx={{ color: 'black' }}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -79,22 +87,45 @@ export function NavBar() {
                             onClose={handleCloseNavMenu}
                             sx={{
                                 display: { xs: 'block', md: 'none' },
-                                backgroundColor: 'white',
                             }}
                         >
+                            {pages.map((page) => (
+                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                                    <Typography textAlign="center">{page}</Typography>
+                                </MenuItem>
+                            ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, color: 'black' }} />
-                    <Box
+
+                    <Typography
+                        variant="h5"
+                        noWrap
                         component="a"
                         href="#app-bar-with-responsive-menu"
                         sx={{
                             mr: 2,
-                            display: { xs: 'flex', md: 'none' },
+                            display: {xs: 'flex', md: 'none'},
                             flexGrow: 1,
+                            fontFamily: 'monospace',
+                            fontWeight: 700,
+                            letterSpacing: '.3rem',
+                            color: 'inherit',
+                            textDecoration: 'none',
                         }}
                     >
-                        <img src={logo} alt="Logo" style={{ height: '40px' }} />
+                        <img src={logo} className="w-32" alt=""/>
+
+                    </Typography>
+                    <Box sx={{flexGrow: 1,justifyContent:'center', display: {xs: 'none', md: 'flex' } }}>
+                        {pages.map((page) => (
+                            <Button
+                                key={page}
+                                onClick={handleCloseNavMenu}
+                                sx={{ my: 2, color: 'black', display: 'block' }} // Changed text color to black
+                            >
+                                {page}
+                            </Button>
+                        ))}
                     </Box>
 
                     <Box sx={{ flexGrow: 0 }}>
@@ -104,7 +135,7 @@ export function NavBar() {
                             </IconButton>
                         </Tooltip>
                         <Menu
-                            sx={{ mt: '45px', backgroundColor: 'white' }}
+                            sx={{ mt: '45px' }}
                             id="menu-appbar"
                             anchorEl={anchorElUser}
                             anchorOrigin={{
@@ -121,7 +152,7 @@ export function NavBar() {
                         >
                             {settings.map((setting) => (
                                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                                    <Typography textAlign="center" sx={{ color: 'black' }}>{setting}</Typography>
+                                    <Typography textAlign="center">{setting}</Typography>
                                 </MenuItem>
                             ))}
                         </Menu>
@@ -131,5 +162,4 @@ export function NavBar() {
         </AppBar>
     );
 }
-
 export default NavBar;

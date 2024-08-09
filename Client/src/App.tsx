@@ -13,7 +13,7 @@ function App() {
           <Routes>
               <Route path="/" Component={Login}></Route>
               <Route path="/register" Component={Register}></Route>
-              <Route path="/dashboard" Component={DefaultLayout}></Route>
+              <Route path="/home" Component={DefaultLayout}></Route>
           </Routes>
       </BrowserRouter>
     </div>
