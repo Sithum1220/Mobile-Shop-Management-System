@@ -77,7 +77,7 @@ const rows: Data[] = [
     createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
-export function Employee() {
+export function Supplier() {
     const handleEdit = (code: string) => {
         console.log("Edit hutta", code);
         // Implement edit functionality
@@ -94,7 +94,7 @@ export function Employee() {
             rows={rows}
             onEdit={handleEdit}
             onDelete={handleDelete}
-            title='Manage Employee'
+            title="Manage Supplier"
         />
     );
 }
