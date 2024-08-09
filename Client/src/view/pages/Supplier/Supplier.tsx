@@ -96,6 +96,7 @@ export function Supplier() {
             onDelete={handleDelete}
             title="Manage Supplier"
             active={false}
+            itemActive={false}
             modalTitle={'Add New Supplier'}
             txt1={'Name'}
             txt2={'Street'}

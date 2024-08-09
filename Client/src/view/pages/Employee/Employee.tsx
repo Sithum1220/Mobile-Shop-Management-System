@@ -96,6 +96,7 @@ export function Employee() {
             onDelete={handleDelete}
             title='Manage Employee'
             active={true}
+            itemActive={false}
             modalTitle={'Add New Employee'}
             txt1={'Name'}
             txt2={'Street'}

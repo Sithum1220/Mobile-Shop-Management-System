@@ -53,6 +53,7 @@ interface ManageFormProps {
     rows: Data[];
     title: string;
     active:boolean;
+    itemActive:boolean;
     modalTitle:string;
     txt1:string;
     txt2:string;
@@ -93,10 +94,11 @@ export function ManageForm(props: ManageFormProps) {
     const handleClose = () => setOpen(false);
 
     const [isActive, setActive] = useState<boolean>(false);
+    const [isItemActive, setItemActive] = useState<boolean>(false);
     return (
         <div className="mb-4">
             <div className="mt-10 flex justify-center w-full items-center flex-col gap-6">
-                <h1 className="font-bold text-2xl mb-2">{props.title}</h1>
+                <h1 className="font-bold text-4xl mb-2">{props.title}</h1>
                 <div className="mb-3 xl:w-96">
                     <input
                         type="search"
@@ -118,6 +120,7 @@ export function ManageForm(props: ManageFormProps) {
                         <Button variant="contained" onClick={() => {
                             handleOpen()
                         setActive(props.active)
+                        setItemActive(props.itemActive)
                         }}>Add</Button>
                     </div>
                     <div className="w-full shadow-2xl border-2 border-gray-200">
@@ -261,6 +264,31 @@ export function ManageForm(props: ManageFormProps) {
                                                 </MenuItem>
                                             ))}
                                         </TextField>
+                                    </div>
+
+                                    <div className={`flex flex-row ${isItemActive ? "block" : "hidden"}`}>
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label="QTY"
+                                            defaultValue=""
+                                        />
+
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label="Buying Price"
+                                            defaultValue=""
+                                        />
+                                    </div>
+
+                                    <div className={`flex flex-row ${isItemActive ? "block" : "hidden"}`}>
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label="Selling Price"
+                                            defaultValue=""
+                                        />
                                     </div>
 
                                     <div className="flex justify-end flex-row gap-5 mt-5">

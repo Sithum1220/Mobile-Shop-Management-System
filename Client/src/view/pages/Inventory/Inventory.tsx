@@ -96,6 +96,7 @@ export function Inventory() {
             onDelete={handleDelete}
             title='Manage Inventory'
             active={false}
+            itemActive={true}
             modalTitle={'Add New Item'}
             txt1={'Item Name'}
             txt2={'Description'}

@@ -3,6 +3,7 @@ import {Dashboard} from "../../pages/Dashboard/Dashboard";
 import {Employee} from "../../pages/Employee/Employee";
 import {Supplier} from "../../pages/Supplier/Supplier";
 import {Inventory} from "../../pages/Inventory/Inventory";
+import {PerchesOrder} from "../../pages/PerchesOrder/PerchesOrder";
 
 export function MainContent() {
     return (
@@ -12,6 +13,7 @@ export function MainContent() {
                 <Route path="/employee" element={<Employee />} />
                 <Route path="/supplier" element={<Supplier />} />
                 <Route path="/inventory" element={<Inventory />} />
+                <Route path="/orders" element={<PerchesOrder />} />
             </Routes>
         </div>
     );
