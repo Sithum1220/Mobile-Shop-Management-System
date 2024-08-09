@@ -10,6 +10,27 @@ import TableBody from "@mui/material/TableBody";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import TablePagination from "@mui/material/TablePagination";
+import {Backdrop, Fade, Modal, TextField} from "@mui/material";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import MenuItem from "@mui/material/MenuItem";
+import {useState} from "react";
+
+
+const roles = [
+    {
+        value: 'Salesmen',
+        label: 'Salesmen',
+    },
+    {
+        value: 'Cleaner',
+        label: 'Cleaner',
+    },
+    {
+        value: 'Other',
+        label: 'Other',
+    }
+];
 
 interface Column {
     id: 'name' | 'code' | 'population' | 'size' | 'density' | 'actions';
@@ -31,6 +52,12 @@ interface ManageFormProps {
     columns: Column[];
     rows: Data[];
     title: string;
+    active:boolean;
+    modalTitle:string;
+    txt1:string;
+    txt2:string;
+    txt3:string;
+    txt4:string;
     onEdit: (code: string) => void;
     onDelete: (code: string) => void;
 }
@@ -61,6 +88,11 @@ export function ManageForm(props: ManageFormProps) {
         )
     );
 
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [isActive, setActive] = useState<boolean>(false);
     return (
         <div className="mb-4">
             <div className="mt-10 flex justify-center w-full items-center flex-col gap-6">
@@ -83,11 +115,14 @@ export function ManageForm(props: ManageFormProps) {
 
                 <div className="w-full">
                     <div className="flex justify-end gap-8 mb-5">
-                        <Button variant="contained">Add</Button>
+                        <Button variant="contained" onClick={() => {
+                            handleOpen()
+                        setActive(props.active)
+                        }}>Add</Button>
                     </div>
                     <div className="w-full shadow-2xl border-2 border-gray-200">
-                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                            <TableContainer sx={{ maxHeight: 440 }}>
+                        <Paper sx={{width: '100%', overflow: 'hidden'}}>
+                            <TableContainer sx={{maxHeight: 440}}>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
@@ -95,7 +130,7 @@ export function ManageForm(props: ManageFormProps) {
                                                 <TableCell
                                                     key={column.id}
                                                     align={column.align}
-                                                    style={{ minWidth: column.minWidth }}
+                                                    style={{minWidth: column.minWidth}}
                                                 >
                                                     {column.label}
                                                 </TableCell>
@@ -119,10 +154,10 @@ export function ManageForm(props: ManageFormProps) {
                                                     })}
                                                     <TableCell align="center">
                                                         <Button onClick={() => props.onEdit(row.code)} color="primary">
-                                                            <EditIcon />
+                                                            <EditIcon/>
                                                         </Button>
                                                         <Button onClick={() => props.onDelete(row.code)} color="error">
-                                                            <DeleteIcon />
+                                                            <DeleteIcon/>
                                                         </Button>
                                                     </TableCell>
                                                 </TableRow>
@@ -143,6 +178,116 @@ export function ManageForm(props: ManageFormProps) {
                     </div>
                 </div>
             </div>
+
+            <div>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    slots={{backdrop: Backdrop}}
+                    slotProps={{
+                        backdrop: {
+                            timeout: 500,
+                        },
+                    }}
+                >
+                    <Fade in={open}>
+                        <Box sx={style}>
+                            <Typography id="transition-modal-title" sx={{fontWeight:'bold',display:'flex',
+                                justifyContent:'center',alignItems:'center'}} variant="h6" component="h2">
+                                {props.modalTitle}
+                            </Typography>
+                            <Typography id="transition-modal-description" sx={{mt: 2}}>
+
+                                <Box
+                                    component="form"
+                                    sx={{
+                                        '& .MuiTextField-root': {m: 1, width: '25ch'},
+                                    }}
+                                    noValidate
+                                    autoComplete="off"
+                                >
+                                    <div className="flex flex-row">
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label={props.txt1}
+                                            defaultValue=""
+                                        />
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label={props.txt2}
+                                            defaultValue=""
+                                        />
+
+                                    </div>
+
+                                    <div className="flex flex-row">
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label={props.txt3}
+                                            defaultValue=""
+                                        />
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label={props.txt4}
+                                            defaultValue=""
+                                        />
+
+                                    </div>
+
+                                    <div className={`flex flex-row ${isActive ? "block" : "hidden"}`}>
+                                        <TextField
+                                            required
+                                            id="outlined-required"
+                                            label="NIC"
+                                            defaultValue=""
+                                        />
+                                        <TextField
+                                            id="outlined-select-currency"
+                                            select
+                                            label="Select Role"
+                                            defaultValue=""
+                                            helperText="Please select Role"
+                                        >
+                                            {roles.map((option) => (
+                                                <MenuItem key={option.value} value={option.value}>
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </TextField>
+                                    </div>
+
+                                    <div className="flex justify-end flex-row gap-5 mt-5">
+                                        <Button variant="contained" onClick={handleClose}>Close</Button>
+                                        <Button variant="contained">Save</Button>
+                                    </div>
+
+                                </Box>
+
+                            </Typography>
+                        </Box>
+                    </Fade>
+                </Modal>
+            </div>
+
         </div>
     );
 }
+
+const style = {
+    position: 'absolute' as 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 500,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+};

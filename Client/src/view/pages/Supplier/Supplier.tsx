@@ -95,6 +95,12 @@ export function Supplier() {
             onEdit={handleEdit}
             onDelete={handleDelete}
             title="Manage Supplier"
+            active={false}
+            modalTitle={'Add New Supplier'}
+            txt1={'Name'}
+            txt2={'Street'}
+            txt3={'City'}
+            txt4={'Mobile Number'}
         />
     );
 }

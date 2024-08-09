@@ -95,6 +95,12 @@ export function Inventory() {
             onEdit={handleEdit}
             onDelete={handleDelete}
             title='Manage Inventory'
+            active={false}
+            modalTitle={'Add New Item'}
+            txt1={'Item Name'}
+            txt2={'Description'}
+            txt3={'Category'}
+            txt4={'Supplier Id'}
         />
     );
 }

@@ -95,6 +95,12 @@ export function Employee() {
             onEdit={handleEdit}
             onDelete={handleDelete}
             title='Manage Employee'
+            active={true}
+            modalTitle={'Add New Employee'}
+            txt1={'Name'}
+            txt2={'Street'}
+            txt3={'City'}
+            txt4={'Mobile Number'}
         />
     );
 }
