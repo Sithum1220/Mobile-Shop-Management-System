@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 
 export function Login() {
+
     return (
         <div className="flex items-center justify-center h-screen w-full px-5 sm:px-0">
             <div className="flex bg-white rounded-lg shadow-lg border overflow-hidden max-w-sm lg:max-w-4xl w-full">
@@ -50,7 +51,7 @@ export function Login() {
                     </div>
                     <div className="mt-4 flex items-center w-full text-center">
                         <Link
-                            to="register"
+                            to="/register"
                             className="text-xs text-gray-500 capitalize text-center w-full"
                         >
                             Don&apos;t have an account yet?

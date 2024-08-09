@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from react-router-dom
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -11,15 +12,16 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../../image/img.png';
 
-const pages = ['Dashboard', 'Employee', 'Supplier','Inventory','Orders'];
+const pages = ['home', 'employee', 'supplier','inventory','orders'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export function NavBar() {
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
+
+    const navigate = useNavigate(); // Initialize the useNavigate hook
 
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
@@ -36,11 +38,15 @@ export function NavBar() {
         setAnchorElUser(null);
     };
 
+    const handleNavigate = (page: string) => {
+        navigate(`/${page}`);
+        handleCloseNavMenu();
+    };
+
     return (
         <AppBar position="static" sx={{ backgroundColor: 'white' }}>
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/*<AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />*/}
                     <Typography
                         variant="h6"
                         noWrap
@@ -89,8 +95,8 @@ export function NavBar() {
                                 display: { xs: 'block', md: 'none' },
                             }}
                         >
-                            {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
+                            {pages.map((page,index) => (
+                                <MenuItem key={index} onClick={() => handleNavigate(page)}>
                                     <Typography textAlign="center">{page}</Typography>
                                 </MenuItem>
                             ))}
@@ -120,7 +126,7 @@ export function NavBar() {
                         {pages.map((page) => (
                             <Button
                                 key={page}
-                                onClick={handleCloseNavMenu}
+                                onClick={() => handleNavigate(page)}
                                 sx={{ my: 2, color: 'black', display: 'block' }} // Changed text color to black
                             >
                                 {page}
