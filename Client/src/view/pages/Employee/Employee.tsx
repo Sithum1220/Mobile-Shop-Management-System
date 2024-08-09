@@ -8,12 +8,14 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Button from "@mui/material/Button";
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 interface Column {
-    id: 'name' | 'code' | 'population' | 'size' | 'density';
+    id: 'name' | 'code' | 'population' | 'size' | 'density' | 'actions';
     label: string;
     minWidth?: number;
-    align?: 'right';
+    align?: 'right' | 'left' | 'center';
     format?: (value: number) => string;
 }
 
@@ -40,6 +42,12 @@ const columns: readonly Column[] = [
         minWidth: 170,
         align: 'right',
         format: (value: number) => value.toFixed(2),
+    },
+    {
+        id: 'actions',
+        label: 'Actions',
+        minWidth: 170,
+        align: 'center',
     },
 ];
 
@@ -79,7 +87,6 @@ const rows = [
     createData('Brazil', 'BR', 210147125, 8515767),
 ];
 
-
 export function Employee() {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -92,10 +99,19 @@ export function Employee() {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+
+    const handleEdit = (code: string) => {
+        console.log("Edit", code);
+        // Implement edit functionality
+    };
+
+    const handleDelete = (code: string) => {
+        console.log("Delete", code);
+        // Implement delete functionality
+    };
+
     return (
         <div>
-
-
             <div className="mt-10 flex justify-center w-full items-center flex-col gap-8">
                 <div className="mb-3 xl:w-96">
                     <input
@@ -114,13 +130,10 @@ export function Employee() {
                 <div className="w-full">
                     <div className="flex justify-end gap-8 mb-5">
                         <Button variant="contained">Add</Button>
-                        <Button variant="contained">Update</Button>
-                        <Button variant="contained">Delete</Button>
                     </div>
                     <div className="w-full shadow-2xl border-2 border-gray-200">
-
-                        <Paper sx={{width: '100%', overflow: 'hidden'}}>
-                            <TableContainer sx={{maxHeight: 440}}>
+                        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+                            <TableContainer sx={{ maxHeight: 440 }}>
                                 <Table stickyHeader aria-label="sticky table">
                                     <TableHead>
                                         <TableRow>
@@ -128,7 +141,7 @@ export function Employee() {
                                                 <TableCell
                                                     key={column.id}
                                                     align={column.align}
-                                                    style={{minWidth: column.minWidth}}
+                                                    style={{ minWidth: column.minWidth }}
                                                 >
                                                     {column.label}
                                                 </TableCell>
@@ -138,22 +151,28 @@ export function Employee() {
                                     <TableBody>
                                         {rows
                                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                            .map((row) => {
-                                                return (
-                                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                                                        {columns.map((column) => {
-                                                            const value = row[column.id];
-                                                            return (
-                                                                <TableCell key={column.id} align={column.align}>
-                                                                    {column.format && typeof value === 'number'
-                                                                        ? column.format(value)
-                                                                        : value}
-                                                                </TableCell>
-                                                            );
-                                                        })}
-                                                    </TableRow>
-                                                );
-                                            })}
+                                            .map((row) => (
+                                                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                                    {columns.slice(0, -1).map((column) => {
+                                                        const value = row[column.id as keyof Data]; // Type assertion here
+                                                        return (
+                                                            <TableCell key={column.id} align={column.align}>
+                                                                {column.format && typeof value === 'number'
+                                                                    ? column.format(value)
+                                                                    : value}
+                                                            </TableCell>
+                                                        );
+                                                    })}
+                                                    <TableCell align="center">
+                                                        <Button onClick={() => handleEdit(row.code)} color="primary">
+                                                            <EditIcon />
+                                                        </Button>
+                                                        <Button onClick={() => handleDelete(row.code)} color="error">
+                                                            <DeleteIcon />
+                                                        </Button>
+                                                    </TableCell>
+                                                </TableRow>
+                                            ))}
                                     </TableBody>
                                 </Table>
                             </TableContainer>
@@ -167,12 +186,9 @@ export function Employee() {
                                 onRowsPerPageChange={handleChangeRowsPerPage}
                             />
                         </Paper>
-
                     </div>
                 </div>
-
             </div>
         </div>
-
     );
 }
