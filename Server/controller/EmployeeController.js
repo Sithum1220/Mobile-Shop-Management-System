@@ -1,4 +1,4 @@
-const Employee = require("../model/Employee");
+const Employee = require("../model/employee");
 
 const getAllEmployees = (req, res, next) => {
     Employee.find()
@@ -27,42 +27,17 @@ const addEmployee = (req, res, next) => {
 }
 
 const updateEmployee = async (req, res, next) => {
-    try {
-        const employeeId = req.body.id;
 
-        const updatedEmployee = await Employee.findByIdAndUpdate(
-            employeeId,
-            {
-                name: req.body.name,
-                street: req.body.street,
-                city: req.body.city,
-                mobile: req.body.mobile,
-                nic: req.body.nic,
-                role: req.body.role,
-            },
-            { new: true }
-        );
-
-        if (!updatedEmployee) {
-            return res.status(404).json({ message: 'Employee not found' });
-        }
-        res.status(200).json(updatedEmployee);
-    } catch (error) {
-        next(error);
-    }
 };
 
 const deleteEmployee =  (req, res, next) => {
     const employeeId = req.body.id;
-   const deleteEmployee = Employee.findByIdAndDelete(employeeId)
-    .then(response => res.json(response))
-    .catch(error => {
-        res.json({error})
-    })
 
-    if (!deleteEmployee) {
-        return res.status(404).json({ message: 'Employee not found' });
-    }
+    Employee.deleteOne({id:employeeId})
+        .then(response => res.json(response))
+        .catch(error => {
+            res.json({error})
+        })
 }
 exports.getAllEmployees = getAllEmployees;
 exports.addEmployee = addEmployee;
