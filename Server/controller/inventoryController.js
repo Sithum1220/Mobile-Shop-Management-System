@@ -1,6 +1,5 @@
 const Inventory = require("../model/inventory");
 const Supplier = require("../model/supplier");
-const getNextSequence = require('../utill/getNextId');
 
 const getAllInventory = (req, res, next) => {
     Inventory.find()
@@ -12,43 +11,45 @@ const getAllInventory = (req, res, next) => {
 
 const addInventory = async (req, res, next) => {
     try {
-        const newInventoryId = await getNextSequence('id');
         const supplierId = req.body.supplier_id;
-
-        console.log(typeof supplierId)
 
         if (typeof supplierId !== "number") {
             return res.status(400).json({ error: 'Invalid supplier ID format' });
         }
 
-
-
-        const supplierData = await Supplier.find({id:supplierId},undefined,undefined);
-
-
-
-        if (supplierData.length > 0) {
-            const newInventory = new Inventory({
-                id: newInventoryId,
-                item_name: req.body.item_name,
-                description: req.body.description,
-                category: req.body.category,
-                supplier_id: supplierId,
-                qty: req.body.qty,
-                buy_price: req.body.buy_price,
-                sell_price: req.body.sell_price,
-            });
-
-            const savedInventory = await newInventory.save();
-            return res.status(201).json(savedInventory);
-        } else {
+        // Check if supplier exists
+        const supplierData = await Supplier.findOne({ id: supplierId });
+        if (!supplierData) {
             return res.status(404).json({ error: 'Supplier not found' });
         }
+
+        // Find the last inventory document
+        const lastInventory = await Inventory.findOne().sort({ _id: -1 }).exec();
+        const newId = lastInventory ? lastInventory.id + 1 : 1;
+
+        console.log(newId)
+        // Create a new inventory item
+        const newInventory = new Inventory({
+            id: newId,
+            item_name: req.body.item_name,
+            description: req.body.description,
+            category: req.body.category,
+            supplier_id: supplierId,
+            qty: req.body.qty,
+            buy_price: req.body.buy_price,
+            sell_price: req.body.sell_price,
+        });
+
+        // Save the new inventory item
+        const savedInventory = await newInventory.save();
+        return res.status(201).json(savedInventory);
+
     } catch (error) {
         console.error(error); // Log the error for debugging
         return res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 
 const updateInventory = async (req, res, next) => {
