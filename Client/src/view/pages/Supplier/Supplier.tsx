@@ -35,7 +35,7 @@ const rows = [
     }
 ]
 
-const columns = ['Name', 'Street', 'City', 'Mobile'];
+const columns = ['id','Name', 'Street', 'City', 'Mobile'];
 
 export function Supplier() {
     const handleEdit = (code: string) => {

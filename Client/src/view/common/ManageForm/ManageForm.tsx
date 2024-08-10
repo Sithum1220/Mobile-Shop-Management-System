@@ -11,8 +11,6 @@ import {
     Grid
 } from "@mui/material";
 import { useState } from "react";
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import {TableComponent} from "../Table/Table";
 
 const roles = [

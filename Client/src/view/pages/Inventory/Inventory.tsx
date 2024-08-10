@@ -36,7 +36,7 @@ const rows = [
     }
 ]
 
-const columns = ['Item Name',"Supplier Id", 'Description', 'Category'];
+const columns = ['id','Item Name',"Supplier Id", 'Description', 'Category'];
 
 export function Inventory() {
     const handleEdit = (code: string) => {

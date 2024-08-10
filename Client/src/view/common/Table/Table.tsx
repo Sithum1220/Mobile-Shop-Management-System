@@ -34,9 +34,9 @@ export function TableComponent(props: TableProps) {
                             rows.map((row: RowData) => (
                                 <TableRow key={row.id}>
                                     {Object.entries(row).map(([key, value], index) => (
-                                        key !== 'id' && (
+                                         (
                                             <TableCell key={index} align="center">
-                                                {value as React.ReactNode}
+                                                {value}
                                             </TableCell>
                                         )
                                     ))}

@@ -41,7 +41,7 @@ const rows = [
     }
 ]
 
-const columns = ['Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
+const columns = ['id','Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
 
 export function Employee() {
     const handleEdit = (code: string) => {
