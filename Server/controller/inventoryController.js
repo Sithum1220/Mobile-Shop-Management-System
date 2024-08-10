@@ -23,11 +23,11 @@ const addInventory = async (req, res, next) => {
             return res.status(404).json({ error: 'Supplier not found' });
         }
 
-        // Find the last inventory document
+        // Find the last inventory id
         const lastInventory = await Inventory.findOne().sort({ _id: -1 }).exec();
         const newId = lastInventory ? lastInventory.id + 1 : 1;
 
-        console.log(newId)
+
         // Create a new inventory item
         const newInventory = new Inventory({
             id: newId,
