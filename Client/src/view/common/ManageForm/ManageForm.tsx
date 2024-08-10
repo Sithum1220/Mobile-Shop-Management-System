@@ -28,6 +28,16 @@ export function ManageForm(props: any) {
     const [isActive, setActive] = useState<boolean>(false);
     const [isItemActive, setItemActive] = useState<boolean>(false);
 
+    const [name, setName] = useState<string>('');
+    const [street, setStreet] = useState<string>('');
+    const [city, setCity] = useState<string>('');
+    const [mobile, setMobile] = useState<string>('');
+    const[nic, setNic] = useState<string>('');
+    const [role, setRole] = useState<string>('');
+    const [qty, setQty] = useState<string>('');
+    const [buyPrice, setBuyPrice] = useState<number>(0.0);
+    const [sellPrice, setSellPrice] = useState<number>(0.0);
+
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(event.target.value);
         setPage(0); // Reset to first page on search
@@ -35,6 +45,14 @@ export function ManageForm(props: any) {
 
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    const handleBuyPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setBuyPrice(parseFloat(e.target.value));
+    };
+
+    const handleSellPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSellPrice(parseFloat(e.target.value));
+    };
 
     return (
         <Box mt={5}>
@@ -106,6 +124,8 @@ export function ManageForm(props: any) {
                                         id="outlined-required"
                                         label={props.txt1}
                                         defaultValue=""
+                                        value={name}
+                                        onChange={e => setName(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -115,6 +135,8 @@ export function ManageForm(props: any) {
                                         id="outlined-required"
                                         label={props.txt2}
                                         defaultValue=""
+                                        value={street}
+                                        onChange={e => setStreet(e.target.value)}
                                     />
                                 </Grid>
                             </Grid>
@@ -126,6 +148,8 @@ export function ManageForm(props: any) {
                                         id="outlined-required"
                                         label={props.txt3}
                                         defaultValue=""
+                                        value={city}
+                                        onChange={e => setCity(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sm={6}>
@@ -135,6 +159,8 @@ export function ManageForm(props: any) {
                                         id="outlined-required"
                                         label={props.txt4}
                                         defaultValue=""
+                                        value={mobile}
+                                        onChange={e => setMobile(e.target.value)}
                                     />
                                 </Grid>
                             </Grid>
@@ -147,6 +173,8 @@ export function ManageForm(props: any) {
                                             id="outlined-required"
                                             label="NIC"
                                             defaultValue=""
+                                            value={nic}
+                                            onChange={e => setNic(e.target.value)}
                                         />
                                     </Grid>
                                     <Grid item xs={12} sm={6}>
@@ -157,6 +185,8 @@ export function ManageForm(props: any) {
                                             label="Select Role"
                                             defaultValue=""
                                             helperText="Please select Role"
+                                            value={role}
+                                            onChange={e => setRole(e.target.value)}
                                         >
                                             {roles.map((option) => (
                                                 <MenuItem key={option.value} value={option.value}>
@@ -177,6 +207,9 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="QTY"
                                                 defaultValue=""
+                                                value={qty}
+                                                onChange={e => setCity(e.target.value)}
+
                                             />
                                         </Grid>
                                         <Grid item xs={12} sm={6}>
@@ -186,6 +219,8 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="Buying Price"
                                                 defaultValue=""
+                                                value={buyPrice}
+                                                onChange={handleBuyPriceChange}
                                             />
                                         </Grid>
                                     </Grid>
@@ -197,6 +232,8 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="Selling Price"
                                                 defaultValue=""
+                                                value={sellPrice}
+                                                onChange={handleSellPriceChange}
                                             />
                                         </Grid>
                                     </Grid>

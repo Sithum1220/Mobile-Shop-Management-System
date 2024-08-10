@@ -9,7 +9,7 @@ const rows = [
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
-        NIC: 200212702212,
+        NIC: '200212702212',
         Role: 'Salesmen'
     },
     {
@@ -18,7 +18,7 @@ const rows = [
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
-        NIC: 200212702212,
+        NIC: '200212702212',
         Role: 'Salesmen'
     },
     {
@@ -27,7 +27,7 @@ const rows = [
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
-        NIC: 200212702212,
+        NIC: '200212702212',
         Role: 'Salesmen'
     },
     {
@@ -36,7 +36,7 @@ const rows = [
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
-        NIC: 200212702212,
+        NIC: '200212702212',
         Role: 'Salesmen'
     }
 ]
