@@ -15,5 +15,18 @@ const db = async () => {
             error);
     }
 }
+// async function dropDatabase() {
+//     await mongoose.connect(MONGODB_URL, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     });
+//
+//     await mongoose.connection.dropDatabase();
+//     console.log('Database dropped');
+//
+//     await mongoose.connection.close();
+// }
+//
+// dropDatabase().catch(console.error);
 
 module.exports = db;

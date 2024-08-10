@@ -2,12 +2,12 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema;
 
 const EmployeeSchema = new Schema({
-    id: Number,
+    id: {type: Number, unique: true},
     name: String,
     street: String,
     city: String,
-    mobile: String,
-    nic: String,
+    mobile: {type: String, unique: true},
+    nic: {type: String, unique: true},
     role: String,
 })
 

@@ -1,4 +1,5 @@
 const Employee = require("../model/employee");
+const getNextSequence = require('../utill/getNextId');
 
 const getAllEmployees = (req, res, next) => {
     Employee.find()
@@ -8,23 +9,27 @@ const getAllEmployees = (req, res, next) => {
         });
 }
 
-const addEmployee = (req, res, next) => {
-    const newEmployee = new Employee({
-        id: req.body.id,
-        name: req.body.name,
-        street: req.body.street,
-        city: req.body.city,
-        mobile: req.body.mobile,
-        nic: req.body.nic,
-        role: req.body.role,
-    });
+const addEmployee = async (req, res, next) => {
+    try {
+        const newEmployeeId = await getNextSequence('id');
 
-    newEmployee.save()
-        .then(response => res.json(response))
-        .catch(error => {
-            res.json({error})
+        const newEmployee = new Employee({
+            id: newEmployeeId,
+            name: req.body.name,
+            street: req.body.street,
+            city: req.body.city,
+            mobile: req.body.mobile,
+            nic: req.body.nic,
+            role: req.body.role,
         });
-}
+
+        const savedEmployee = await newEmployee.save();
+        res.json(savedEmployee);
+    } catch (error) {
+        res.json({ error });
+    }
+};
+
 
 const updateEmployee = async (req, res, next) => {
     const { id, name, street, city, mobile, nic, role } = req.body;
