@@ -27,8 +27,25 @@ const addEmployee = (req, res, next) => {
 }
 
 const updateEmployee = async (req, res, next) => {
+    const { id, name, street, city, mobile, nic, role } = req.body;
 
+    try {
+        const result = await Employee.updateOne(
+            { id: id }, // filter condition
+            { $set: { name, street, city, mobile, nic, role } } // fields to update
+        );
+
+        if (result.modifiedCount === 0) {
+            return res.status(404).json({ error: 'Employee not found or no any changes' });
+        }else {
+            return res.status(200).json("Successfully updated Employee");
+        }
+
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 };
+
 
 const deleteEmployee =  (req, res, next) => {
     const employeeId = req.body.id;
