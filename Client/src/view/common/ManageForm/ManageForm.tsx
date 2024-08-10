@@ -1,13 +1,6 @@
 import * as React from 'react';
 import {
     Button,
-    Paper,
-    TableContainer,
-    Table,
-    TableHead,
-    TableRow,
-    TableCell,
-    TableBody,
     Backdrop,
     Fade,
     Modal,
@@ -20,6 +13,7 @@ import {
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import {TableComponent} from "../Table/Table";
 
 const roles = [
     { value: 'Salesmen', label: 'Salesmen' },
@@ -72,48 +66,12 @@ export function ManageForm(props: any) {
                         Add
                     </Button>
                 </Grid>
-                <Grid item xs={12} sx={{ width: '100%', boxShadow: 3, border: 1, borderColor: 'grey.300' }}>
-                    <TableContainer component={Paper}>
-                        <Table>
-                            <TableHead>
-                                <TableRow>
-                                    {props.columns.map((column: any, index: number) => (
-                                        <TableCell key={index} align="center">{column}</TableCell>
-                                    ))}
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
-                                {props.rows.length > 0 ? (
-                                    props.rows.map((row: any) => (
-                                        <TableRow key={row.id}>
-                                            {Object.entries(row).map(([key, value]: [string, any], index: number) => (
-                                                key !== 'id' && (
-                                                    <TableCell key={index} align="center">
-                                                        {value}
-                                                    </TableCell>
-                                                )
-                                            ))}
-                                            <TableCell align="center">
-                                                <Button onClick={() => { }}>
-                                                    <EditIcon />
-                                                </Button>
-                                                <Button onClick={() => { }}>
-                                                    <DeleteIcon />
-                                                </Button>
-                                            </TableCell>
-                                        </TableRow>
-                                    ))
-                                ) : (
-                                    <TableRow>
-                                        <TableCell colSpan={props.columns.length} align="center">
-                                            No Data
-                                        </TableCell>
-                                    </TableRow>
-                                )}
-                            </TableBody>
-                        </Table>
-                    </TableContainer>
-                </Grid>
+
+                    <TableComponent
+                    rows={props.rows}
+                    columns={props.columns}
+                    />
+
             </Grid>
 
             <Modal
