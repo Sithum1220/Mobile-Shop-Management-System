@@ -36,7 +36,7 @@ const rows = [
     }
 ]
 
-const columns = ['Item Name',"Supplier Id", 'Description', 'Category','Action'];
+const columns = ['Item Name',"Supplier Id", 'Description', 'Category'];
 
 export function Inventory() {
     const handleEdit = (code: string) => {
@@ -63,6 +63,7 @@ export function Inventory() {
             txt2={'Description'}
             txt3={'Category'}
             txt4={'Supplier Id'}
+            showActions={true}
         />
     );
 }

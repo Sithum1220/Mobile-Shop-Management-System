@@ -70,6 +70,7 @@ export function ManageForm(props: any) {
                     <TableComponent
                     rows={props.rows}
                     columns={props.columns}
+                    showActions={props.showActions}
                     />
 
             </Grid>

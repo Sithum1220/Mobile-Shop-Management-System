@@ -41,7 +41,7 @@ const rows = [
     }
 ]
 
-const columns = ['Name', 'Street', 'City', 'Mobile', 'NIC', 'Role','Action'];
+const columns = ['Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
 
 export function Employee() {
     const handleEdit = (code: string) => {
@@ -67,6 +67,7 @@ export function Employee() {
             txt2={'Street'}
             txt3={'City'}
             txt4={'Mobile Number'}
+            showActions={true}
         />
     );
 }

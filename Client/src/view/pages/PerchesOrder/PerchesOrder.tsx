@@ -9,7 +9,7 @@ const rows = [
     { id: 4, item_code: 1, item_name: 'Iphon 11', qty: 2, total: 350000.00, date: '2024/08/10' }
 ];
 
-const columns = ['Item Code', 'Item Name', 'QTY', 'Total', 'Date', 'Action'];
+const columns = ['Item Code', 'Item Name', 'QTY', 'Total', 'Date'];
 
 export function PerchesOrder() {
 
@@ -63,7 +63,7 @@ export function PerchesOrder() {
                 <Button variant="contained">Perches</Button>
             </Box>
 
-            <TableComponent columns={columns} rows={rows} />
+            <TableComponent columns={columns} rows={rows} showActions={true} />
         </Box>
     );
 }

@@ -6,6 +6,7 @@ import * as React from "react";
 interface TableProps {
     columns: string[];
     rows: RowData[];
+    showActions: boolean;
 }
 
 interface RowData {
@@ -25,6 +26,7 @@ export function TableComponent(props: TableProps) {
                             {columns.map((column, index) => (
                                 <TableCell key={index} align="center">{column}</TableCell>
                             ))}
+                            {props.showActions && (<TableCell align="center">Actions</TableCell>)}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -38,19 +40,21 @@ export function TableComponent(props: TableProps) {
                                             </TableCell>
                                         )
                                     ))}
-                                    <TableCell align="center">
-                                        <Button onClick={() => { /* Edit action */ }}>
-                                            <EditIcon />
-                                        </Button>
-                                        <Button onClick={() => { /* Delete action */ }}>
-                                            <DeleteIcon />
-                                        </Button>
-                                    </TableCell>
+                                    {props.showActions && (
+                                        <TableCell align="center">
+                                            <Button onClick={() => { /* Edit action */ }}>
+                                                <EditIcon />
+                                            </Button>
+                                            <Button onClick={() => { /* Delete action */ }}>
+                                                <DeleteIcon />
+                                            </Button>
+                                        </TableCell>
+                                    )}
                                 </TableRow>
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length} align="center">
+                                <TableCell colSpan={columns.length + (props.showActions ? 1 : 0)} align="center">
                                     No Data
                                 </TableCell>
                             </TableRow>
