@@ -33,7 +33,9 @@ export function TableComponent(props: TableProps) {
                         {rows.length > 0 ? (
                             rows.map((row: RowData) => (
                                 <TableRow key={row.id}>
-                                    {Object.entries(row).map(([key, value], index) => (
+                                    {Object.entries(row)
+                                        .filter(([key, _]) => key !== '_id' && key !== '__v')
+                                        .map(([key, value], index) => (
                                          (
                                             <TableCell key={index} align="center">
                                                 {value}

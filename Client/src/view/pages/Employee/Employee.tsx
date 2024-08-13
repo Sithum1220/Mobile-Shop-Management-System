@@ -1,11 +1,14 @@
 import * as React from 'react';
-import { ManageForm } from "../../common/ManageForm/ManageForm";
-
+import {ManageForm} from "../../common/ManageForm/ManageForm";
+import Axios from "axios";
+import {useEffect, useState} from "react";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 const rows = [
     {
         id: 1,
-        name:'Sithum Imesh',
+        name: 'Sithum Imesh',
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
@@ -14,7 +17,7 @@ const rows = [
     },
     {
         id: 2,
-        name:'Sithum Imesh',
+        name: 'Sithum Imesh',
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
@@ -23,7 +26,7 @@ const rows = [
     },
     {
         id: 3,
-        name:'Sithum Imesh',
+        name: 'Sithum Imesh',
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
@@ -32,7 +35,7 @@ const rows = [
     },
     {
         id: 4,
-        name:'Sithum Imesh',
+        name: 'Sithum Imesh',
         street: 'Duwagoda',
         city: 'Hikkaduwa',
         mobile: '+ 94 77 7524729',
@@ -41,9 +44,25 @@ const rows = [
     }
 ]
 
-const columns = ['id','Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
+const columns = ['id', 'Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
 
 export function Employee() {
+
+    const [employees, setEmployees] = useState([])
+
+    useEffect(() => {
+        getEmployees();
+    }, [])
+
+    const getEmployees = () => {
+        Axios.get('http://localhost:4000/api/v1/allEmployees')
+            .then(res => {
+                console.log(res.data)
+                setEmployees(res?.data || []);
+            })
+            .catch(error => console.log("Axios Error: " + error))
+    }
+
     const handleEdit = (code: string) => {
         console.log("Edit", code);
     };
@@ -56,7 +75,7 @@ export function Employee() {
     return (
         <ManageForm
             columns={columns}
-            rows={rows}
+            rows={employees}
             onEdit={handleEdit}
             onDelete={handleDelete}
             title='Manage Employee'

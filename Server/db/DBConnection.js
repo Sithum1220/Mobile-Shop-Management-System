@@ -15,6 +15,7 @@ const db = async () => {
             error);
     }
 }
+
 // async function dropDatabase() {
 //     await mongoose.connect(MONGODB_URL, {
 //         useNewUrlParser: true,

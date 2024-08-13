@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useLayoutEffect} from "react";
 import { DetailsCard } from "../../common/DetailsCard/DetailsCard";
 import { Box, Typography, Paper, Grid } from "@mui/material";
 import { TableComponent } from "../../common/Table/Table";
@@ -13,6 +13,10 @@ const rows = [
 const columns = ['Item Code', 'Item Name', 'QTY', 'Total', 'Date'];
 
 export function Dashboard() {
+
+    // useEffect(() => {
+    //     console.log("Dashboard");
+    // },[])
     return (
         <Box sx={{ p: 3, mt:3 }}>
             <Grid container spacing={3}>
