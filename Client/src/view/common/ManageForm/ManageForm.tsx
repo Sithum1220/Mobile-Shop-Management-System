@@ -19,12 +19,20 @@ const roles = [
     {value: 'Other', label: 'Other'}
 ];
 
+interface RowData {
+    id: number;
+
+    [key: string]: string | number;
+}
+
 export function ManageForm(props: any) {
     const [page, setPage] = React.useState(0);
     const [searchQuery, setSearchQuery] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [isActive, setActive] = useState<boolean>(false);
     const [isItemActive, setItemActive] = useState<boolean>(false);
+    const [selectedRow, setSelectedRow] = useState<RowData | null>(null);
+
 
     const [name, setName] = useState<string>('');
     const [street, setStreet] = useState<string>('');
@@ -35,6 +43,10 @@ export function ManageForm(props: any) {
     const [qty, setQty] = useState<string>('');
     const [buyPrice, setBuyPrice] = useState<number>(0.0);
     const [sellPrice, setSellPrice] = useState<number>(0.0);
+
+    const[isClosed, setIsClosed] = useState(false);
+    const[edit, setEdit] = useState("Save");
+
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(event.target.value);
@@ -52,8 +64,25 @@ export function ManageForm(props: any) {
         setSellPrice(parseFloat(e.target.value));
     };
 
+    const handleEdit = (row: RowData) => {
+        setName(row.name as string);
+        setStreet(row.street as string);
+        setCity(row.city as string);
+        setMobile(row.mobile as string);
+        setNic(row.nic as string);
+        setRole(row.role as string);
+        setQty(row.qty as string);
+        setBuyPrice(Number(row.buyPrice));
+        setSellPrice(Number(row.sellPrice));
+        setSelectedRow(row);
+        setActive(true);
+        setItemActive(props.itemActive);
+        handleOpen();
+        setEdit("Update")
+    };
+
     useEffect(() => {
-        if (!props.submited){
+        if (!props.submited) {
             handleClose();
             setName('')
             setStreet('')
@@ -63,8 +92,10 @@ export function ManageForm(props: any) {
             setMobile('')
             handleClose();
             props.setSubmited(false);
+            setIsClosed(false)
         }
-    },[props.submited])
+    }, [props.submited,isClosed])
+
     return (
         <Box mt={5}>
             <Grid container direction="column" alignItems="center" spacing={2}>
@@ -90,6 +121,8 @@ export function ManageForm(props: any) {
                             handleOpen();
                             setActive(props.active);
                             setItemActive(props.itemActive);
+                            setSelectedRow(null);
+                            setEdit("Save")
                         }}
                     >
                         Add
@@ -100,8 +133,8 @@ export function ManageForm(props: any) {
                     rows={props.rows}
                     columns={props.columns}
                     showActions={props.showActions}
+                    onEdit={handleEdit} // Pass the handleEdit function
                 />
-
             </Grid>
 
             <Modal
@@ -212,7 +245,7 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="QTY"
                                                 value={qty}
-                                                onChange={e => setCity(e.target.value)}
+                                                onChange={e => setQty(e.target.value)}
 
                                             />
                                         </Grid>
@@ -243,22 +276,42 @@ export function ManageForm(props: any) {
                             )}
                             <Grid container justifyContent="flex-end" spacing={2} sx={{mt: 3}}>
                                 <Grid item>
-                                    <Button variant="contained" onClick={handleClose}>Close</Button>
+                                    <Button variant="contained" onClick={() => {
+                                        setIsClosed(true)
+                                        handleClose();
+                                        props.setSubmited(false);
+                                    }}>Close</Button>
                                 </Grid>
                                 <Grid item>
                                     <Button variant="contained" onClick={() => {
-                                        props.createEmployee({
-                                            name: name,
-                                            street: street,
-                                            city: city,
-                                            mobile: mobile,
-                                            nic: nic,
-                                            role: role,
-                                        })
-                                        // if (!props.submited){
-                                        //     handleClose();
-                                        // }
-                                    }}>Save</Button>
+                                        if (selectedRow) {
+                                            props.update({
+                                                id: selectedRow.id,
+                                                name: name,
+                                                street: street,
+                                                city: city,
+                                                mobile: mobile,
+                                                nic: nic,
+                                                role: role,
+                                                qty: qty,
+                                                buyPrice: buyPrice,
+                                                sellPrice: sellPrice,
+                                            });
+                                        } else {
+                                            // Create new employee logic
+                                            props.create({
+                                                name: name,
+                                                street: street,
+                                                city: city,
+                                                mobile: mobile,
+                                                nic: nic,
+                                                role: role,
+                                                qty: qty,
+                                                buyPrice: buyPrice,
+                                                sellPrice: sellPrice,
+                                            });
+                                        }
+                                    }}>{edit}</Button>
                                 </Grid>
                             </Grid>
                         </Box>
@@ -274,9 +327,10 @@ const style = {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: 500,
+    width: 400,
     bgcolor: 'background.paper',
     border: '2px solid #000',
+    borderRadius: 1,
     boxShadow: 24,
     p: 4,
 };

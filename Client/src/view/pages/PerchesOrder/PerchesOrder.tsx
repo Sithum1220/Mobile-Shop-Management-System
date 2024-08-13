@@ -63,7 +63,7 @@ export function PerchesOrder() {
                 <Button variant="contained">Perches</Button>
             </Box>
 
-            <TableComponent columns={columns} rows={rows} showActions={true} />
+            <TableComponent onEdit={null} columns={columns} rows={rows} showActions={true} />
         </Box>
     );
 }

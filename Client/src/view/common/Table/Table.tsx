@@ -7,6 +7,7 @@ interface TableProps {
     columns: string[];
     rows: RowData[];
     showActions: boolean;
+    onEdit: any;  // Add this prop
 }
 
 interface RowData {
@@ -15,7 +16,7 @@ interface RowData {
 }
 
 export function TableComponent(props: TableProps) {
-    const { columns = [], rows = [] } = props;
+    const { columns = [], rows = [], showActions, onEdit } = props;
 
     return (
         <Grid item xs={12} sx={{ width: '100%', boxShadow: 3, border: 1, borderColor: 'grey.300' }}>
@@ -26,7 +27,7 @@ export function TableComponent(props: TableProps) {
                             {columns.map((column, index) => (
                                 <TableCell key={index} align="center">{column}</TableCell>
                             ))}
-                            {props.showActions && (<TableCell align="center">Actions</TableCell>)}
+                            {showActions && (<TableCell align="center">Actions</TableCell>)}
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -36,15 +37,13 @@ export function TableComponent(props: TableProps) {
                                     {Object.entries(row)
                                         .filter(([key, _]) => key !== '_id' && key !== '__v')
                                         .map(([key, value], index) => (
-                                         (
                                             <TableCell key={index} align="center">
                                                 {value}
                                             </TableCell>
-                                        )
-                                    ))}
-                                    {props.showActions && (
+                                        ))}
+                                    {showActions && (
                                         <TableCell align="center">
-                                            <Button onClick={() => { /* Edit action */ }}>
+                                            <Button onClick={() => onEdit(row)}>
                                                 <EditIcon />
                                             </Button>
                                             <Button onClick={() => { /* Delete action */ }}>
@@ -56,7 +55,7 @@ export function TableComponent(props: TableProps) {
                             ))
                         ) : (
                             <TableRow>
-                                <TableCell colSpan={columns.length + (props.showActions ? 1 : 0)} align="center">
+                                <TableCell colSpan={columns.length + (showActions ? 1 : 0)} align="center">
                                     No Data
                                 </TableCell>
                             </TableRow>

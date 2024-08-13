@@ -7,7 +7,10 @@
     <list default="true" id="c9a716cb-c3bc-442b-a7eb-e6549c946132" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/common/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/common/Table/Table.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +139,7 @@
       <workItem from="1723279154356" duration="4432000" />
       <workItem from="1723286334524" duration="23636000" />
       <workItem from="1723425875481" duration="5103000" />
-      <workItem from="1723517260155" duration="8453000" />
+      <workItem from="1723517260155" duration="12595000" />
     </task>
     <servers />
   </component>
