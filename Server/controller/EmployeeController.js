@@ -1,5 +1,4 @@
 const Employee = require("../model/employee");
-const getNextSequence = require('../utill/getNextId');
 
 const getAllEmployees = (req, res, next) => {
     Employee.find()
@@ -11,10 +10,11 @@ const getAllEmployees = (req, res, next) => {
 
 const addEmployee = async (req, res, next) => {
     try {
-        const newEmployeeId = await getNextSequence('id');
+        const lastEmployee = await Employee.findOne().sort({ _id: -1 }).exec();
+        const newId = lastEmployee ? lastEmployee.id + 1 : 1;
 
         const newEmployee = new Employee({
-            id: newEmployeeId,
+            id: newId,
             name: req.body.name,
             street: req.body.street,
             city: req.body.city,
@@ -26,7 +26,7 @@ const addEmployee = async (req, res, next) => {
         const savedEmployee = await newEmployee.save();
         res.json(savedEmployee);
     } catch (error) {
-        res.json({ error });
+        res.status(500).json({ error: error.message });
     }
 };
 

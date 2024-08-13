@@ -1,5 +1,5 @@
 const Supplier = require("../model/supplier");
-const getNextSequence = require('../utill/getNextId');
+const Employee = require("../model/employee");
 
 const getAllSupplier = (req, res, next) => {
     Supplier.find()
@@ -11,10 +11,11 @@ const getAllSupplier = (req, res, next) => {
 
 const addSupplier = async (req, res, next) => {
     try {
-        const newSupplierId = await getNextSequence('id');
+        const lastSupplier = await Supplier.findOne().sort({ _id: -1 }).exec();
+        const newId = lastSupplier ? lastSupplier.id + 1 : 1;
 
         const newSupplier = new Supplier({
-            id: newSupplierId,
+            id: newId,
             name: req.body.name,
             street: req.body.street,
             city: req.body.city,

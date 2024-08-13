@@ -49,6 +49,7 @@ const columns = ['id', 'Name', 'Street', 'City', 'Mobile', 'NIC', 'Role'];
 export function Employee() {
 
     const [employees, setEmployees] = useState([])
+    const [submited, setSubmited] = useState(false)
 
     useEffect(() => {
         getEmployees();
@@ -61,6 +62,26 @@ export function Employee() {
                 setEmployees(res?.data || []);
             })
             .catch(error => console.log("Axios Error: " + error))
+    }
+
+    const createEmployee = (data:any) => {
+        setSubmited(true);
+        const payLoad = {
+            name: data.name,
+            street: data.street,
+            city: data.city,
+            mobile: data.mobile,
+            nic: data.nic,
+            role: data.role,
+        }
+        console.log("Payload", payLoad)
+        Axios.post('http://localhost:4000/api/v1/creatEmployee',payLoad)
+            .then(() => {
+               getEmployees()
+                setSubmited(false)
+            })
+            .catch(error => console.log(
+                "Axios Error: " + error))
     }
 
     const handleEdit = (code: string) => {
@@ -87,6 +108,9 @@ export function Employee() {
             txt3={'City'}
             txt4={'Mobile Number'}
             showActions={true}
+            createEmployee={createEmployee}
+            submited={submited}
+            setSubmited={setSubmited}
         />
     );
 }

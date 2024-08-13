@@ -10,13 +10,13 @@ import {
     MenuItem,
     Grid
 } from "@mui/material";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {TableComponent} from "../Table/Table";
 
 const roles = [
-    { value: 'Salesmen', label: 'Salesmen' },
-    { value: 'Cleaner', label: 'Cleaner' },
-    { value: 'Other', label: 'Other' }
+    {value: 'Salesmen', label: 'Salesmen'},
+    {value: 'Cleaner', label: 'Cleaner'},
+    {value: 'Other', label: 'Other'}
 ];
 
 export function ManageForm(props: any) {
@@ -30,7 +30,7 @@ export function ManageForm(props: any) {
     const [street, setStreet] = useState<string>('');
     const [city, setCity] = useState<string>('');
     const [mobile, setMobile] = useState<string>('');
-    const[nic, setNic] = useState<string>('');
+    const [nic, setNic] = useState<string>('');
     const [role, setRole] = useState<string>('');
     const [qty, setQty] = useState<string>('');
     const [buyPrice, setBuyPrice] = useState<number>(0.0);
@@ -52,6 +52,19 @@ export function ManageForm(props: any) {
         setSellPrice(parseFloat(e.target.value));
     };
 
+    useEffect(() => {
+        if (!props.submited){
+            handleClose();
+            setName('')
+            setStreet('')
+            setCity('')
+            setNic('')
+            setRole('')
+            setMobile('')
+            handleClose();
+            props.setSubmited(false);
+        }
+    },[props.submited])
     return (
         <Box mt={5}>
             <Grid container direction="column" alignItems="center" spacing={2}>
@@ -60,14 +73,14 @@ export function ManageForm(props: any) {
                         {props.title}
                     </Typography>
                 </Grid>
-                <Grid item sx={{width: '30%' }}>
+                <Grid item sx={{width: '30%'}}>
                     <TextField
                         fullWidth
                         variant="outlined"
                         placeholder="Search"
                         value={searchQuery}
                         onChange={handleSearch}
-                        sx={{ mt: 2}}
+                        sx={{mt: 2}}
                     />
                 </Grid>
                 <Grid item container justifyContent="flex-end" marginBottom={2}>
@@ -83,11 +96,11 @@ export function ManageForm(props: any) {
                     </Button>
                 </Grid>
 
-                    <TableComponent
+                <TableComponent
                     rows={props.rows}
                     columns={props.columns}
                     showActions={props.showActions}
-                    />
+                />
 
             </Grid>
 
@@ -97,23 +110,23 @@ export function ManageForm(props: any) {
                 open={open}
                 onClose={handleClose}
                 closeAfterTransition
-                slots={{ backdrop: Backdrop }}
+                slots={{backdrop: Backdrop}}
                 slotProps={{
-                    backdrop: { timeout: 500 },
+                    backdrop: {timeout: 500},
                 }}
             >
                 <Fade in={open}>
                     <Box sx={style}>
                         <Typography
                             id="transition-modal-title"
-                            sx={{ fontWeight: 'bold', textAlign: 'center' }}
+                            sx={{fontWeight: 'bold', textAlign: 'center'}}
                             variant="h6"
                             component="h2"
                         >
                             {props.modalTitle}
                         </Typography>
 
-                        <Box component="form" sx={{ mt: 2 }} noValidate autoComplete="off">
+                        <Box component="form" sx={{mt: 2}} noValidate autoComplete="off">
                             <Grid container spacing={2} mb={2}>
                                 <Grid item xs={12} sm={6}>
                                     <TextField
@@ -121,7 +134,6 @@ export function ManageForm(props: any) {
                                         fullWidth
                                         id="outlined-required"
                                         label={props.txt1}
-                                        defaultValue=""
                                         value={name}
                                         onChange={e => setName(e.target.value)}
                                     />
@@ -132,7 +144,6 @@ export function ManageForm(props: any) {
                                         fullWidth
                                         id="outlined-required"
                                         label={props.txt2}
-                                        defaultValue=""
                                         value={street}
                                         onChange={e => setStreet(e.target.value)}
                                     />
@@ -145,7 +156,6 @@ export function ManageForm(props: any) {
                                         fullWidth
                                         id="outlined-required"
                                         label={props.txt3}
-                                        defaultValue=""
                                         value={city}
                                         onChange={e => setCity(e.target.value)}
                                     />
@@ -156,7 +166,6 @@ export function ManageForm(props: any) {
                                         fullWidth
                                         id="outlined-required"
                                         label={props.txt4}
-                                        defaultValue=""
                                         value={mobile}
                                         onChange={e => setMobile(e.target.value)}
                                     />
@@ -170,7 +179,6 @@ export function ManageForm(props: any) {
                                             fullWidth
                                             id="outlined-required"
                                             label="NIC"
-                                            defaultValue=""
                                             value={nic}
                                             onChange={e => setNic(e.target.value)}
                                         />
@@ -181,7 +189,6 @@ export function ManageForm(props: any) {
                                             select
                                             fullWidth
                                             label="Select Role"
-                                            defaultValue=""
                                             helperText="Please select Role"
                                             value={role}
                                             onChange={e => setRole(e.target.value)}
@@ -204,7 +211,6 @@ export function ManageForm(props: any) {
                                                 fullWidth
                                                 id="outlined-required"
                                                 label="QTY"
-                                                defaultValue=""
                                                 value={qty}
                                                 onChange={e => setCity(e.target.value)}
 
@@ -216,7 +222,6 @@ export function ManageForm(props: any) {
                                                 fullWidth
                                                 id="outlined-required"
                                                 label="Buying Price"
-                                                defaultValue=""
                                                 value={buyPrice}
                                                 onChange={handleBuyPriceChange}
                                             />
@@ -229,7 +234,6 @@ export function ManageForm(props: any) {
                                                 fullWidth
                                                 id="outlined-required"
                                                 label="Selling Price"
-                                                defaultValue=""
                                                 value={sellPrice}
                                                 onChange={handleSellPriceChange}
                                             />
@@ -237,12 +241,24 @@ export function ManageForm(props: any) {
                                     </Grid>
                                 </>
                             )}
-                            <Grid container justifyContent="flex-end" spacing={2} sx={{ mt: 3 }}>
+                            <Grid container justifyContent="flex-end" spacing={2} sx={{mt: 3}}>
                                 <Grid item>
                                     <Button variant="contained" onClick={handleClose}>Close</Button>
                                 </Grid>
                                 <Grid item>
-                                    <Button variant="contained">Save</Button>
+                                    <Button variant="contained" onClick={() => {
+                                        props.createEmployee({
+                                            name: name,
+                                            street: street,
+                                            city: city,
+                                            mobile: mobile,
+                                            nic: nic,
+                                            role: role,
+                                        })
+                                        // if (!props.submited){
+                                        //     handleClose();
+                                        // }
+                                    }}>Save</Button>
                                 </Grid>
                             </Grid>
                         </Box>
