@@ -133,7 +133,8 @@ export function ManageForm(props: any) {
                     rows={props.rows}
                     columns={props.columns}
                     showActions={props.showActions}
-                    onEdit={handleEdit} // Pass the handleEdit function
+                    onEdit={handleEdit}
+                    delete={props.delete}// Pass the handleEdit function
                 />
             </Grid>
 

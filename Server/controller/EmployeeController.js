@@ -53,7 +53,7 @@ const updateEmployee = async (req, res, next) => {
 
 
 const deleteEmployee =  (req, res, next) => {
-    const employeeId = req.body.id;
+    const employeeId = req.params.id;
 
     Employee.deleteOne({id:employeeId})
         .then(response => res.json(response))

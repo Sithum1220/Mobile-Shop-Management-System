@@ -67,21 +67,23 @@ export function Employee() {
                 "Axios Error: " + error))
     }
 
-    const handleEdit = (code: string) => {
-        console.log("Edit", code);
-    };
+    const deleteEmployee = (id: number) => {
+        if (window.confirm("Are you sure you want to delete this Employee?")) {
+            Axios.delete('http://localhost:4000/api/v1/deleteEmployee/' + id)
+                .then(() => {
+                    getEmployees()
+                    setSubmited(false)
+                })
+                .catch(error => console.log(
+                    "Axios Error: " + error))
+        }
 
-    const handleDelete = (code: string) => {
-        console.log("Delete", code);
-        // Implement delete functionality
-    };
+    }
 
     return (
         <ManageForm
             columns={columns}
             rows={employees}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
             title='Manage Employee'
             active={true}
             itemActive={false}
@@ -93,6 +95,7 @@ export function Employee() {
             showActions={true}
             create={createEmployee}
             update={updateEmployee}
+            delete={deleteEmployee}
             submited={submited}
             setSubmited={setSubmited}
         />

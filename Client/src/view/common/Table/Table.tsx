@@ -7,7 +7,8 @@ interface TableProps {
     columns: string[];
     rows: RowData[];
     showActions: boolean;
-    onEdit: any;  // Add this prop
+    onEdit: any;
+    delete:any// Add this prop
 }
 
 interface RowData {
@@ -46,7 +47,7 @@ export function TableComponent(props: TableProps) {
                                             <Button onClick={() => onEdit(row)}>
                                                 <EditIcon />
                                             </Button>
-                                            <Button onClick={() => { /* Delete action */ }}>
+                                            <Button onClick={() => { props.delete(row.id) }}>
                                                 <DeleteIcon />
                                             </Button>
                                         </TableCell>

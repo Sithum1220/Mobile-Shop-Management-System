@@ -11,6 +11,7 @@
       <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/routes/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/employee.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,7 +140,7 @@
       <workItem from="1723279154356" duration="4432000" />
       <workItem from="1723286334524" duration="23636000" />
       <workItem from="1723425875481" duration="5103000" />
-      <workItem from="1723517260155" duration="12595000" />
+      <workItem from="1723517260155" duration="14239000" />
     </task>
     <servers />
   </component>

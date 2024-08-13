@@ -37,7 +37,7 @@ export function Dashboard() {
                 </Typography>
 
                 <Paper sx={{ mt: 6, boxShadow: 3 }}>
-                    <TableComponent onEdit={undefined} columns={columns} rows={rows} showActions={false} />
+                    <TableComponent delete={undefined} onEdit={undefined} columns={columns} rows={rows} showActions={false} />
                 </Paper>
             </Box>
         </Box>
