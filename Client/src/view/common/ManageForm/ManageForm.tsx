@@ -75,7 +75,7 @@ export function ManageForm(props: any) {
         setBuyPrice(Number(row.buyPrice));
         setSellPrice(Number(row.sellPrice));
         setSelectedRow(row);
-        setActive(true);
+        setActive(props.emFieldActive);
         setItemActive(props.itemActive);
         handleOpen();
         setEdit("Update")

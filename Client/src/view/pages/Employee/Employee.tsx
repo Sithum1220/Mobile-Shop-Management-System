@@ -10,8 +10,6 @@ export function Employee() {
 
     const [employees, setEmployees] = useState([])
     const [submited, setSubmited] = useState(false)
-    const [isEdit, setIsEdit] = useState(false)
-    const [selectedEmployee, setSelectedEmployee] = useState({})
 
     useEffect(() => {
         getEmployees();
@@ -98,6 +96,7 @@ export function Employee() {
             delete={deleteEmployee}
             submited={submited}
             setSubmited={setSubmited}
+            emFieldActive={true}
         />
     );
 }

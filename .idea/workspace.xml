@@ -7,11 +7,8 @@
     <list default="true" id="c9a716cb-c3bc-442b-a7eb-e6549c946132" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/common/Table/Table.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/common/Table/Table.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Dashboard/Dashboard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/PerchesOrder/PerchesOrder.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/employee.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/employee.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Supplier/Supplier.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Supplier/Supplier.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +62,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;ts.external.directory.path&quot;: &quot;/Users/sithumimesh/Documents/Devicer/devicer-system/Client/node_modules/typescript/lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -140,7 +138,14 @@
       <workItem from="1723279154356" duration="4432000" />
       <workItem from="1723286334524" duration="23636000" />
       <workItem from="1723425875481" duration="5103000" />
-      <workItem from="1723517260155" duration="14239000" />
+      <workItem from="1723517260155" duration="15327000" />
+      <workItem from="1723537099217" duration="415000" />
+      <workItem from="1723537522299" duration="54000" />
+      <workItem from="1723539026211" duration="6000" />
+      <workItem from="1723574968027" duration="953000" />
+      <workItem from="1723645291715" duration="191000" />
+      <workItem from="1723649555743" duration="15000" />
+      <workItem from="1723691780643" duration="1400000" />
     </task>
     <servers />
   </component>

@@ -52,7 +52,7 @@ const updateSupplier = async (req, res, next) => {
 
 
 const deleteSupplier =  (req, res, next) => {
-    const supplierId = req.body.id;
+    const supplierId = req.params.id;
 
     Supplier.deleteOne({id:supplierId})
         .then(response => res.json(response))

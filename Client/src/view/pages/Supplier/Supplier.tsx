@@ -1,59 +1,80 @@
 import * as React from 'react';
 import { ManageForm } from "../../common/ManageForm/ManageForm";
-
-const rows = [
-    {
-        id: 1,
-        name:'Sithum Imesh',
-        street: 'Duwagoda',
-        city: 'Hikkaduwa',
-        mobile: '+ 94 77 7524729',
-
-    },
-    {
-        id: 2,
-        name:'Sithum Imesh',
-        street: 'Duwagoda',
-        city: 'Hikkaduwa',
-        mobile: '+ 94 77 7524729',
-
-    },
-    {
-        id: 3,
-        name:'Sithum Imesh',
-        street: 'Duwagoda',
-        city: 'Hikkaduwa',
-        mobile: '+ 94 77 7524729',
-
-    },
-    {
-        id: 4,
-        name:'Sithum Imesh',
-        street: 'Duwagoda',
-        city: 'Hikkaduwa',
-        mobile: '+ 94 77 7524729',
-    }
-]
+import {useEffect, useState} from "react";
+import Axios from "axios";
 
 const columns = ['id','Name', 'Street', 'City', 'Mobile'];
 
 export function Supplier() {
-    const handleEdit = (code: string) => {
-        console.log("Edit", code);
-        // Implement edit functionality
-    };
+    const [suppliers, setSupplier] = useState([])
+    const [submited, setSubmited] = useState(false)
 
-    const handleDelete = (code: string) => {
-        console.log("Delete", code);
-        // Implement delete functionality
-    };
+
+    useEffect(() => {
+        getSupplier();
+    }, [])
+
+    const getSupplier = () => {
+        Axios.get('http://localhost:4000/api/v1/allSupplier')
+            .then(res => {
+                console.log(res.data)
+                setSupplier(res?.data || []);
+            })
+            .catch(error => console.log("Axios Error: " + error))
+    }
+
+    const createSupplier = (data: any) => {
+        setSubmited(true);
+        const payLoad = {
+            name: data.name,
+            street: data.street,
+            city: data.city,
+            mobile: data.mobile,
+        }
+        Axios.post('http://localhost:4000/api/v1/creatSupplier', payLoad)
+            .then(() => {
+                getSupplier()
+                setSubmited(false)
+            })
+            .catch(error => console.log(
+                "Axios Error: " + error))
+    }
+
+    const updateSupplier = (data: any) => {
+        setSubmited(true);
+        const payLoad = {
+            id: data.id,
+            name: data.name,
+            street: data.street,
+            city: data.city,
+            mobile: data.mobile,
+        }
+        Axios.patch('http://localhost:4000/api/v1/updateSupplier', payLoad)
+            .then(() => {
+                getSupplier()
+                setSubmited(false)
+            })
+            .catch(error => console.log(
+                "Axios Error: " + error))
+    }
+
+    const deleteSupplier = (id: number) => {
+        if (window.confirm("Are you sure you want to delete this Supplier?")) {
+            Axios.delete('http://localhost:4000/api/v1/deleteSupplier/' + id)
+                .then(() => {
+                    getSupplier();
+                    setSubmited(false)
+                })
+                .catch(error => console.log(
+                    "Axios Error: " + error))
+        }
+
+    }
 
     return (
         <ManageForm
             columns={columns}
-            rows={rows}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
+            rows={suppliers}
             title="Manage Supplier"
             active={false}
             itemActive={false}
@@ -63,6 +84,12 @@ export function Supplier() {
             txt3={'City'}
             txt4={'Mobile Number'}
             showActions={true}
+            create={createSupplier}
+            update={updateSupplier}
+            delete={deleteSupplier}
+            submited={submited}
+            setSubmited={setSubmited}
+            emFieldActive={false}
         />
     );
 }
