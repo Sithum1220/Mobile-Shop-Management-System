@@ -40,6 +40,8 @@ const addInventory = async (req, res, next) => {
             sell_price: req.body.sell_price,
         });
 
+        console.log('data')
+        console.log(newInventory)
         // Save the new inventory item
         const savedInventory = await newInventory.save();
         return res.status(201).json(savedInventory);

@@ -75,14 +75,11 @@ export function Supplier() {
         <ManageForm
             columns={columns}
             rows={suppliers}
-            title="Manage Supplier"
+            title="Manae Supplier"
             active={false}
             itemActive={false}
+            otherFieldActive={true}
             modalTitle={'Add New Supplier'}
-            txt1={'Name'}
-            txt2={'Street'}
-            txt3={'City'}
-            txt4={'Mobile Number'}
             showActions={true}
             create={createSupplier}
             update={updateSupplier}

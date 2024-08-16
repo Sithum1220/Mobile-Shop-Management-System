@@ -30,6 +30,7 @@ export function ManageForm(props: any) {
     const [searchQuery, setSearchQuery] = React.useState('');
     const [open, setOpen] = React.useState(false);
     const [isActive, setActive] = useState<boolean>(false);
+    const [isOtherFieldActive, setOtherFieldActive] = useState<boolean>(false);
     const [isItemActive, setItemActive] = useState<boolean>(false);
     const [selectedRow, setSelectedRow] = useState<RowData | null>(null);
 
@@ -41,11 +42,16 @@ export function ManageForm(props: any) {
     const [nic, setNic] = useState<string>('');
     const [role, setRole] = useState<string>('');
     const [qty, setQty] = useState<string>('');
-    const [buyPrice, setBuyPrice] = useState<number>(0.0);
-    const [sellPrice, setSellPrice] = useState<number>(0.0);
+    const [buyPrice, setBuyPrice] = useState<string>('');
+    const [sellPrice, setSellPrice] = useState<string>('');
 
-    const[isClosed, setIsClosed] = useState(false);
-    const[edit, setEdit] = useState("Save");
+    const [itemName, setItemName] = useState<string>('');
+    const [description, setDescription] = useState<string>('');
+    const [category, setCategory] = useState<string>('');
+    const [supplierId, setsupplierId] = useState<string>('');
+
+    const [isClosed, setIsClosed] = useState(false);
+    const [edit, setEdit] = useState("Save");
 
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,29 +62,30 @@ export function ManageForm(props: any) {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleBuyPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setBuyPrice(parseFloat(e.target.value));
-    };
-
-    const handleSellPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setSellPrice(parseFloat(e.target.value));
-    };
-
     const handleEdit = (row: RowData) => {
+        setItemName(row.item_name as string);
+        setDescription(row.description as string);
+        setCategory(row.category as string);
+        setsupplierId(row.supplier_id?.toString() || '');
+        setQty(row.qty?.toString() || '');
+        setBuyPrice(row.buy_price?.toString() || '');
+        setSellPrice(row.sell_price?.toString() || '');
+console.log(row.item_name);
         setName(row.name as string);
         setStreet(row.street as string);
         setCity(row.city as string);
         setMobile(row.mobile as string);
         setNic(row.nic as string);
         setRole(row.role as string);
-        setQty(row.qty as string);
-        setBuyPrice(Number(row.buyPrice));
-        setSellPrice(Number(row.sellPrice));
+
+
         setSelectedRow(row);
         setActive(props.emFieldActive);
         setItemActive(props.itemActive);
+        setOtherFieldActive(props.otherFieldActive);
         handleOpen();
         setEdit("Update")
+        console.log(row.name)
     };
 
     useEffect(() => {
@@ -94,7 +101,7 @@ export function ManageForm(props: any) {
             props.setSubmited(false);
             setIsClosed(false)
         }
-    }, [props.submited,isClosed])
+    }, [props.submited, isClosed])
 
     return (
         <Box mt={5}>
@@ -123,6 +130,7 @@ export function ManageForm(props: any) {
                             setItemActive(props.itemActive);
                             setSelectedRow(null);
                             setEdit("Save")
+                            setOtherFieldActive(props.otherFieldActive);
                         }}
                     >
                         Add
@@ -161,50 +169,56 @@ export function ManageForm(props: any) {
                         </Typography>
 
                         <Box component="form" sx={{mt: 2}} noValidate autoComplete="off">
-                            <Grid container spacing={2} mb={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="outlined-required"
-                                        label={props.txt1}
-                                        value={name}
-                                        onChange={e => setName(e.target.value)}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="outlined-required"
-                                        label={props.txt2}
-                                        value={street}
-                                        onChange={e => setStreet(e.target.value)}
-                                    />
-                                </Grid>
-                            </Grid>
-                            <Grid container spacing={2} mb={2}>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="outlined-required"
-                                        label={props.txt3}
-                                        value={city}
-                                        onChange={e => setCity(e.target.value)}
-                                    />
-                                </Grid>
-                                <Grid item xs={12} sm={6}>
-                                    <TextField
-                                        required
-                                        fullWidth
-                                        id="outlined-required"
-                                        label={props.txt4}
-                                        value={mobile}
-                                        onChange={e => setMobile(e.target.value)}
-                                    />
-                                </Grid>
-                            </Grid>
+                            {isOtherFieldActive && (
+                                <>
+                                    <Grid container spacing={2} mb={2}>
+
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label={"Name"}
+                                                value={name}
+                                                onChange={e => setName(e.target.value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label={"Street"}
+                                                value={street}
+                                                onChange={e => setStreet(e.target.value)}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container spacing={2} mb={2}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label={"City"}
+                                                value={city}
+                                                onChange={e => setCity(e.target.value)}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label={"Mobile"}
+                                                value={mobile}
+                                                onChange={e => setMobile(e.target.value)}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </>
+                            )}
+
                             {isActive && (
                                 <Grid container spacing={2} mb={2}>
                                     <Grid item xs={12} sm={6}>
@@ -244,6 +258,54 @@ export function ManageForm(props: any) {
                                                 required
                                                 fullWidth
                                                 id="outlined-required"
+                                                label="Item Name"
+                                                value={itemName}
+                                                onChange={(e) => setItemName(e.target.value)}
+
+
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label="Description"
+                                                value={description}
+                                                onChange={(e) => setDescription(e.target.value)}
+                                            />
+                                        </Grid>
+                                    </Grid>
+
+                                    <Grid container spacing={2} mb={2}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label="Category"
+                                                value={category}
+                                                onChange={(e) => setCategory(e.target.value)}
+
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
+                                                label="Spplier Id"
+                                                value={supplierId}
+                                                onChange={(e) => setsupplierId(e.target.value)}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container spacing={2} mb={2}>
+                                        <Grid item xs={12} sm={6}>
+                                            <TextField
+                                                required
+                                                fullWidth
+                                                id="outlined-required"
                                                 label="QTY"
                                                 value={qty}
                                                 onChange={e => setQty(e.target.value)}
@@ -257,7 +319,7 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="Buying Price"
                                                 value={buyPrice}
-                                                onChange={handleBuyPriceChange}
+                                                onChange={e => setBuyPrice(e.target.value)}
                                             />
                                         </Grid>
                                     </Grid>
@@ -269,7 +331,7 @@ export function ManageForm(props: any) {
                                                 id="outlined-required"
                                                 label="Selling Price"
                                                 value={sellPrice}
-                                                onChange={handleSellPriceChange}
+                                                onChange={e => setSellPrice(e.target.value)}
                                             />
                                         </Grid>
                                     </Grid>
@@ -288,6 +350,11 @@ export function ManageForm(props: any) {
                                         if (selectedRow) {
                                             props.update({
                                                 id: selectedRow.id,
+                                                itemName: itemName,
+                                                description: description,
+                                                category: category,
+                                                supplierId: supplierId,
+
                                                 name: name,
                                                 street: street,
                                                 city: city,
@@ -299,8 +366,12 @@ export function ManageForm(props: any) {
                                                 sellPrice: sellPrice,
                                             });
                                         } else {
-                                            // Create new employee logic
                                             props.create({
+                                                itemName: itemName,
+                                                description: description,
+                                                category: category,
+                                                supplierId: supplierId,
+
                                                 name: name,
                                                 street: street,
                                                 city: city,

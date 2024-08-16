@@ -86,16 +86,13 @@ export function Employee() {
             active={true}
             itemActive={false}
             modalTitle={'Add New Employee'}
-            txt1={'Name'}
-            txt2={'Street'}
-            txt3={'City'}
-            txt4={'Mobile Number'}
             showActions={true}
             create={createEmployee}
             update={updateEmployee}
             delete={deleteEmployee}
             submited={submited}
             setSubmited={setSubmited}
+            otherFieldActive={true}
             emFieldActive={true}
         />
     );
