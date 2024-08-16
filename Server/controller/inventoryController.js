@@ -75,7 +75,7 @@ const updateInventory = async (req, res, next) => {
 };
 
 
-const deleteInventory = (req, res, next) => {
+const deleteInventory = async (req, res, next) => {
     const inventoryId = req.params.id;
 
     Inventory.deleteOne({id: inventoryId})
@@ -84,7 +84,17 @@ const deleteInventory = (req, res, next) => {
             res.json({error})
         })
 }
+
+const getItemById = async (req, res, next) => {
+    const id = req.params.id;
+     await Inventory.findOne({ id: id })
+        .then(response => res.json(response))
+        .catch(error => {
+            res.json({error})
+        });
+}
 exports.getAllInventory = getAllInventory;
 exports.addInventory = addInventory;
 exports.updateInventory = updateInventory;
 exports.deleteInventory = deleteInventory;
+exports.getItemById = getItemById;

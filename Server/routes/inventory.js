@@ -7,5 +7,6 @@ console.log("routers")
 router.post('/creatInventory',inventoryController.addInventory);
 router.patch('/updateInventory',inventoryController.updateInventory);
 router.delete('/deleteInventory/:id',inventoryController.deleteInventory);
+router.get('/getItemById/:id',inventoryController.getItemById);
 
 module.exports = router;
