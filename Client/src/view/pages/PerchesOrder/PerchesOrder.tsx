@@ -57,7 +57,6 @@ export function PerchesOrder() {
     const handleAddToCart = () => {
         if (itemCode && itemName && itemQty > 0) {
             const existingItemIndex = cart.findIndex(item => item.item_code === itemCode);
-
             if (existingItemIndex !== -1) {
                 const updatedCart = cart.map((item, index) => {
                     if (index === existingItemIndex) {
@@ -92,12 +91,37 @@ export function PerchesOrder() {
         }
     };
 
-
-
     const handleDelete = (id: number) => {
         const updatedCart = cart.filter((item) => item.id !== id);
         setCart(updatedCart);
     };
+
+    const createOrder = () => {
+        // Transform the cart into the desired order format
+        if (cart.length > 0) {
+            const order = {
+                item_name: cart[0].item_name, // Assuming all items have the same item_name
+                items: cart.map(item => ({
+                    item_code: item.item_code,
+                    qty: item.qty,
+                })),
+                date: new Date(),
+                total: cart.reduce((acc, item) => acc + item.total, 0),
+            };
+
+            // Log the order to check the structure
+            console.log(order);
+
+            Axios.post('http://localhost:4000/api/v1/creatOrder', order)
+                .then(() => {
+                    setCart([]); // Clear the cart after successful order creation
+                })
+                .catch(error => console.log("Axios Error: " + error));
+        } else {
+            console.log("Cart is empty, cannot create an order.");
+        }
+    };
+
 
     return (
         <Box mb={4}>
@@ -160,7 +184,7 @@ export function PerchesOrder() {
             </Box>
 
             <Box textAlign="right" mb={4}>
-                <Button variant="contained">Perches</Button>
+                <Button variant="contained" onClick={createOrder}>Perches</Button>
             </Box>
 
             <Grid item xs={12} sx={{ width: '100%', boxShadow: 3, border: 1, borderColor: 'grey.300' }}>
