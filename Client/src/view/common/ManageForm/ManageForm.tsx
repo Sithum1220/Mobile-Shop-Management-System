@@ -52,6 +52,7 @@ export function ManageForm(props: any) {
 
     const [isClosed, setIsClosed] = useState(false);
     const [edit, setEdit] = useState("Save");
+    // const [title, setTitle] = useState('');
 
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -97,6 +98,13 @@ console.log(row.item_name);
             setNic('')
             setRole('')
             setMobile('')
+            setItemName('')
+            setDescription('')
+            setCategory('')
+            setsupplierId('')
+            setBuyPrice('')
+            setSellPrice('')
+            setQty('')
             handleClose();
             props.setSubmited(false);
             setIsClosed(false)
@@ -165,7 +173,7 @@ console.log(row.item_name);
                             variant="h6"
                             component="h2"
                         >
-                            {props.modalTitle}
+                            {edit+" "+props.modalTitle}
                         </Typography>
 
                         <Box component="form" sx={{mt: 2}} noValidate autoComplete="off">

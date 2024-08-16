@@ -79,7 +79,7 @@ export function Supplier() {
             active={false}
             itemActive={false}
             otherFieldActive={true}
-            modalTitle={'Add New Supplier'}
+            modalTitle={'Supplier'}
             showActions={true}
             create={createSupplier}
             update={updateSupplier}

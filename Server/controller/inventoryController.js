@@ -76,7 +76,7 @@ const updateInventory = async (req, res, next) => {
 
 
 const deleteInventory = (req, res, next) => {
-    const inventoryId = req.body.id;
+    const inventoryId = req.params.id;
 
     Inventory.deleteOne({id: inventoryId})
         .then(response => res.json(response))

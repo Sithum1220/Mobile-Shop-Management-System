@@ -82,7 +82,7 @@ export function Inventory() {
             title='Manage Inventory'
             active={false}
             itemActive={true}
-            modalTitle={'Add New Item'}
+            modalTitle={'Item'}
             showActions={true}
             create={createInventory}
             update={updateInventory}

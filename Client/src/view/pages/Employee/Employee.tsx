@@ -85,7 +85,7 @@ export function Employee() {
             title='Manage Employee'
             active={true}
             itemActive={false}
-            modalTitle={'Add New Employee'}
+            modalTitle={'Employee'}
             showActions={true}
             create={createEmployee}
             update={updateEmployee}

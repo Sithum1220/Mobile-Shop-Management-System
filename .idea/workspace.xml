@@ -7,12 +7,6 @@
     <list default="true" id="c9a716cb-c3bc-442b-a7eb-e6549c946132" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/common/ManageForm/ManageForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Employee/Employee.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Inventory/Inventory.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Inventory/Inventory.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Client/src/view/pages/Supplier/Supplier.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/Client/src/view/pages/Supplier/Supplier.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/controller/inventoryController.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/controller/inventoryController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/routes/inventory.js" beforeDir="false" afterPath="$PROJECT_DIR$/Server/routes/inventory.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,7 +143,7 @@
       <workItem from="1723574968027" duration="953000" />
       <workItem from="1723645291715" duration="191000" />
       <workItem from="1723649555743" duration="15000" />
-      <workItem from="1723691780643" duration="17645000" />
+      <workItem from="1723691780643" duration="18287000" />
     </task>
     <servers />
   </component>
