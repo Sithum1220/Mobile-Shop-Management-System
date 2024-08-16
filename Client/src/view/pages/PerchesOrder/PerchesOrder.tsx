@@ -97,10 +97,9 @@ export function PerchesOrder() {
     };
 
     const createOrder = () => {
-        // Transform the cart into the desired order format
         if (cart.length > 0) {
             const order = {
-                item_name: cart[0].item_name, // Assuming all items have the same item_name
+                item_name: cart[0].item_name,
                 items: cart.map(item => ({
                     item_code: item.item_code,
                     qty: item.qty,
@@ -109,12 +108,12 @@ export function PerchesOrder() {
                 total: cart.reduce((acc, item) => acc + item.total, 0),
             };
 
-            // Log the order to check the structure
             console.log(order);
 
             Axios.post('http://localhost:4000/api/v1/creatOrder', order)
                 .then(() => {
-                    setCart([]); // Clear the cart after successful order creation
+                    setCart([]);
+                    window.alert("Successfully Placed Order!")
                 })
                 .catch(error => console.log("Axios Error: " + error));
         } else {
@@ -122,7 +121,26 @@ export function PerchesOrder() {
         }
     };
 
+    const getAllOrders = () => {
+        setCart([])
+        Axios.get('http://localhost:4000/api/v1/allOrder')
+            .then((res) => {
+                const orders = res.data.map((order: any, index: number) => {
+                    const items = order.items.map((item: any) => ({
+                        id: index + 1,
+                        item_code: item.item_code,
+                        item_name: order.item_name,  // assuming the item name is the same for all items
+                        qty: item.qty,
+                        total: order.total,  // assuming total is split across items or set here as needed
+                        date: order.date,
+                    }));
+                    return items;
+                }).flat();  // flatten array if there are multiple orders with items
 
+                setCart(orders);
+            })
+            .catch((error) => console.log("Axios Error: " + error));
+    };
     return (
         <Box mb={4}>
             <Box textAlign="center" mb={4} mt={4}>
@@ -143,36 +161,39 @@ export function PerchesOrder() {
                     value={itemQty || ''}
                     onChange={(e) => setQty(Number(e.target.value))}
                 />
-                <TextField required label="Cash" variant="outlined" />
+                <TextField required label="Cash" variant="outlined"/>
             </Box>
 
             <Box display="flex" justifyContent="center" gap={4} mb={4}>
                 <Paper elevation={3}
-                       sx={{ p: 3, borderRadius: 2, width: '20%', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <Grid sx={{ display: "flex", justifyContent: "start", alignItems: "center", gap: 2 }}>
-                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Item Name:</Typography>
+                       sx={{p: 3, borderRadius: 2, width: '20%', display: 'flex', flexDirection: 'column', gap: 4}}>
+                    <Grid sx={{display: "flex", justifyContent: "start", alignItems: "center", gap: 2}}>
+                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Item
+                            Name:</Typography>
                         <Typography variant="h5" component="div">{itemName}</Typography>
                     </Grid>
 
-                    <Grid sx={{ display: "flex", justifyContent: "start", alignItems: "center", gap: 2 }}>
-                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Unit Price:</Typography>
+                    <Grid sx={{display: "flex", justifyContent: "start", alignItems: "center", gap: 2}}>
+                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Unit
+                            Price:</Typography>
                         <Typography variant="h5" component="div">{unitPrice}</Typography>
                     </Grid>
 
-                    <Grid sx={{ display: "flex", justifyContent: "start", alignItems: "center", gap: 2 }}>
+                    <Grid sx={{display: "flex", justifyContent: "start", alignItems: "center", gap: 2}}>
                         <Typography variant="h6" component="div" color="primary" fontWeight="bold">QTY:</Typography>
                         <Typography variant="h5" component="div">{lblItemQty}</Typography>
                     </Grid>
                 </Paper>
 
                 <Paper elevation={3}
-                       sx={{ p: 3, borderRadius: 2, width: '20%', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                    <Grid sx={{ display: "flex", justifyContent: "start", alignItems: "center", gap: 2 }}>
-                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Total Price:</Typography>
+                       sx={{p: 3, borderRadius: 2, width: '20%', display: 'flex', flexDirection: 'column', gap: 4}}>
+                    <Grid sx={{display: "flex", justifyContent: "start", alignItems: "center", gap: 2}}>
+                        <Typography variant="h6" component="div" color="primary" fontWeight="bold">Total
+                            Price:</Typography>
                         <Typography variant="h5" component="div">{unitPrice * itemQty}</Typography>
                     </Grid>
 
-                    <Grid sx={{ display: "flex", justifyContent: "start", alignItems: "center", gap: 2 }}>
+                    <Grid sx={{display: "flex", justifyContent: "start", alignItems: "center", gap: 2}}>
                         <Typography variant="h6" component="div" color="primary" fontWeight="bold">Balance:</Typography>
                         <Typography variant="h5" component="div">00.00</Typography>
                     </Grid>
@@ -183,11 +204,14 @@ export function PerchesOrder() {
                 </Paper>
             </Box>
 
-            <Box textAlign="right" mb={4}>
+            <Box textAlign="right" className="flex justify-end gap-5" mb={4}>
+                <Button variant="contained" onClick={() => setCart([])}>Clear Table</Button>
+                <Button variant="contained" onClick={getAllOrders}>Get All Order</Button>
                 <Button variant="contained" onClick={createOrder}>Perches</Button>
             </Box>
 
-            <Grid item xs={12} sx={{ width: '100%', boxShadow: 3, border: 1, borderColor: 'grey.300' }}>
+
+            <Grid item xs={12} sx={{width: '100%', boxShadow: 3, border: 1, borderColor: 'grey.300'}}>
                 <TableContainer component={Paper}>
                     <Table>
                         <TableHead>
@@ -210,7 +234,7 @@ export function PerchesOrder() {
                                         <TableCell align="center">{row.date}</TableCell>
                                         <TableCell align="center">
                                             <Button onClick={() => handleDelete(row.id)}>
-                                                <DeleteIcon />
+                                                <DeleteIcon/>
                                             </Button>
                                         </TableCell>
                                     </TableRow>
